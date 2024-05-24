@@ -1,6 +1,6 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
-
+const { Op } = require("sequelize");
 class ProductoService {
   constructor() { }
   
@@ -15,18 +15,57 @@ class ProductoService {
   }  
 
   async Categories() {
-    const subCategorias = await models.Categoria.findAll({
+    const categoria = await models.Categoria.findAll({
       where: {
         estado: 1,
       },
     });
 
-    return subCategorias;
+    return categoria;
   }  
+
+  async createCategoria(data) {
+    const categoria = await models.Categoria.create(data);
+    return categoria;
+  }
+
+
+  async FilterByCategoria(id_categoria) {
+    const producto = await models.Producto.findAll({
+      where: {
+        id_categoria: id_categoria,
+      },
+    });
+
+    return producto;
+  }  
+
+  async FilterByPrecio(precio) {
+    const producto = await models.Producto.findAll({
+      where: {
+        precio: {
+          [Op.gte]: precio
+        }
+      },
+    });
+
+    return producto;
+  }  
+
+  async FilterByNombre(nombre) {
+    const producto = await models.Producto.findAll({
+      where: {
+        nombre: {
+          [Op.startsWith]: nombre
+        }
+      },
+    });
+
+    return producto;
+  } 
 
   async detailById(id) {
     const producto = await models.Producto.findByPk(id);
-
     return producto;
   }
   

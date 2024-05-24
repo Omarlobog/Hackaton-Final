@@ -29,6 +29,10 @@ const UsuarioSchema = {
     allowNull: true,
     type: DataTypes.INTEGER,
   },
+  github: {
+    type: DataTypes.STRING,
+    defaultValue: null,
+  },
   estado: {
     allowNull: true,
     type: DataTypes.INTEGER,

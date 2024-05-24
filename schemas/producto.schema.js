@@ -24,10 +24,21 @@ const updateProductoSchema = Joi.object({
   estado: estado,
 });
 
+const createCategoriaSchema = Joi.object({
+  nombre: nombre.optional().allow(null),
+  estado: estado,
+});
+
 const getProductoSchema = Joi.object({ id: id });
+const getProductoName = Joi.object({ nombre });
+const getProductoPrice = Joi.object({ precio });
+
 
 module.exports = {
   createProductoSchema,
   updateProductoSchema,
   getProductoSchema,
+  getProductoName,
+  getProductoPrice,
+  createCategoriaSchema
 };

@@ -5,24 +5,29 @@ const {
   updateUsuarioSchema,
   createUsuarioSchema,
   getUsuarioSchema,
-  getUsuarioLoginSchema
+  getUsuarioLoginSchema,
 } = require('../schemas/usuario.schema');
 
+const jwt = require('jsonwebtoken');
+const { validateJwt } = require('../middlewares/validate-jwt');
 const crypto = require('crypto-js');
 
 const router = express.Router();
 const service = new UsuarioService();
 
-
 router.post(
   '/register',
-  validatorHandler(createUsuarioSchema, 'body'),
+  [validatorHandler(createUsuarioSchema, 'body'), validateJwt],
   async (req, res, next) => {
     try {
-      const body = req.body;
+      let body = req.body;
+      const key = '20232023';
+
+      body.clave = crypto.AES.encrypt(body.clave, key).toString();
+
       const user = await service.create(body);
 
-      res.status(201).json(user);
+      res.status(201).json({ user });
     } catch (error) {
       next(error);
     }
@@ -47,15 +52,13 @@ router.patch(
   }
 );
 
-
-
 router.post(
   '/login',
   validatorHandler(getUsuarioLoginSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
-      const usuario = body.usuario;
+      const usuario = body.email;
       const clave = body.clave;
 
       const user = await service.findUserLogin(usuario);
@@ -64,12 +67,29 @@ router.post(
 
       const key = '20232023';
 
-      const decrypted = crypto.AES.decrypt(claveBD, key).toString(crypto.enc.Utf8);
+      const decrypted = crypto.AES.decrypt(claveBD, key).toString(
+        crypto.enc.Utf8
+      );
+
+      const token = jwt.sign(
+        {
+          id: user.id,
+        },
+        process.env.SECRET_TOKEN,
+        { expiresIn: '1h' }
+      );
 
       if (decrypted === clave) {
-        res.status(201).json({ status: true, id: user.id , user: user});
+        res.status(201).json({
+          status: true,
+          id: user.id,
+          user: user,
+          tokens: {
+            accessToken: token,
+          },
+        });
       } else {
-        res.status(201).json({ status: false, id: null });
+        res.status(201).json([]);
       }
     } catch (error) {
       next(error);
@@ -105,6 +125,5 @@ router.post(
     }
   }
 );
-
 
 module.exports = router;

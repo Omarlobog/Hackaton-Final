@@ -6,14 +6,16 @@ const {
   createProductoSchema,
   updateProductoSchema,
   getProductoSchema,
-  getDescripcionProductoSchema
+  getProductoName,
+  getProductoPrice,
+  createCategoriaSchema
 } = require('../schemas/producto.schema');
 
 
 const router = express.Router();
 const service = new ProductoService();
 
-router.post(
+router.get(
   '/',
   validatorHandler(getProductoSchema, 'body'),
   async (req, res, next) => {
@@ -29,12 +31,14 @@ router.post(
 );
 
 router.get(
-  '/categorias',
+  '/categoria/:id',
   validatorHandler(getProductoSchema, 'params'),
   async (req, res, next) => {
     try {
-      const products = await service.Categories();
-      res.json(products);
+
+      const { id } = req.params;
+      const product = await service.FilterByCategoria(id);
+      res.json(product);
     } catch (error) {
       next(error);
     }
@@ -42,7 +46,40 @@ router.get(
 );
 
 router.get(
-  '/:id',
+  '/:nombre',
+  validatorHandler(getProductoName, 'params'),
+  async (req, res, next) => {
+    try {
+
+      const { nombre } = req.params;
+      const product = await service.FilterByNombre(nombre);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  '/precio/:precio',
+  validatorHandler(getProductoPrice, 'params'),
+  async (req, res, next) => {
+    try {
+
+      const { precio } = req.params;
+      const product = await service.FilterByPrecio(precio);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+
+
+
+router.get(
+  '/detail/:id',
   validatorHandler(getProductoSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -56,6 +93,19 @@ router.get(
   }
 );
 
+router.post(
+  '/categoria/nuevo',
+  validatorHandler(createCategoriaSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const categoria = await service.createCategoria(body);
+      res.status(201).json(categoria);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.post(
   '/crear',
@@ -64,7 +114,7 @@ router.post(
     try {
       const body = req.body;
       const product = await service.createProduct(body);
-      res.status(201).json(product?.id);
+      res.status(201).json(product);
     } catch (error) {
       next(error);
     }
@@ -72,9 +122,9 @@ router.post(
 );
 
 
-router.get(
+router.delete(
   '/eliminar/:id',
-  validatorHandler(getDescripcionProductoSchema, 'params'),
+  validatorHandler(getProductoSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
