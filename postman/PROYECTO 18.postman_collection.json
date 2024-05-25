@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "5c6b5e65-2037-4155-916a-c2354d757260",
+		"name": "PROYECTO 18",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33661600"
+	},
+	"item": [
+		{
+			"name": "COMPRAS",
+			"item": [
+				{
+					"name": "NUEVA COMPRA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_usuario\": 1,\r\n    \"total\": 50,\r\n    \"estado\": 1,\r\n    \"detallecompra\": [\r\n        {\r\n            \"id_producto\": 1,\r\n            \"cantidad\":2,\r\n            \"precio\": 22\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/compras",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"compras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETALLE COMPRA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/compras/1",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"compras",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MIS COMPRAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/compras/user/1",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"compras",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCTOS",
+			"item": [
+				{
+					"name": "TODOS LOS PRODUCTOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTOS POR CATEGORIA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/categoria/3",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"categoria",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTO POR NOMBRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/a",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTO POR PRECIO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/precio/2000",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"precio",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINAR PRODUCTO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/eliminar/1",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NUEVO PRODUCTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_categoria\": 1,\r\n    \"nombre\": \"Silla\",\r\n    \"descripcion\": \"100x40\",\r\n    \"estado\": 1,\r\n    \"precio\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/crear",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR PRODUCTO",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_categoria\": 1,\r\n    \"nombre\": \"Celular\",\r\n    \"descripcion\": \"Samsung S20\",\r\n    \"estado\": 1,\r\n    \"precio\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/editar/1",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"editar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DETALLE PRODUCTO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/productos/detail/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"productos",
+								"detail",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USUARIO",
+			"item": [
+				{
+					"name": "CREAR USUARIO",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"Juan\",\r\n    \"apellidos\": \"Diego\",\r\n    \"email\": \"diego@gmail.com\",\r\n    \"clave\": \"123\",\r\n    \"tipo\": 1,\r\n    \"estado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/usuarios/register",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"usuarios",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN USUARIO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"email\": \"juan@gmail.com\",\r\n    \"clave\": \"123\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/usuarios/login",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"usuarios",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORIAS",
+			"item": [
+				{
+					"name": "NUEVA CATEGORIA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Celulares\",\r\n    \"estado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/productos/categoria/nuevo",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"productos",
+								"categoria",
+								"nuevo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TODAS LAS CATEGORIAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://hackaton-final.onrender.com/api/categorias/lista",
+							"protocol": "https",
+							"host": [
+								"hackaton-final",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"categorias",
+								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
